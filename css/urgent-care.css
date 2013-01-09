@@ -1,0 +1,177 @@
+body{/*padding-bottom:40px*/}nav.navbar-fixed-top{position:static;margin-bottom:18px}footer{text-align:center}section{padding-bottom:60px}#logo{margin-left:28px}#mobileLogo{background-image:url('../img/logo.png');width:97px;height:33px}@media all and (-webkit-min-device-pixel-ratio:1.5){#mobileLogo{background-image:url('../img/logo@2x.png');background-size:97px 33px}}#sideNav{float:left}#content{float:right}#blueAdvantageHeader{background:url(/assets/shopper/public/images/blueadvantage-logo-big.gif) no-repeat}.hide-img-text{text-indent:-9999px;background-size:contain}.hide-img-textt{text-indent:100%;white-space:nowrap;overflow:hidden}.nav-collapse .nav>li>ul>li>a{padding-left:40px}@media(max-width:480px){.hero-unit h1{font-size:40px;margin-bottom:10px}.hero-unit p{font-size:18px}.tab-content>.tab-pane,.pill-content>.pill-pane{display:block}.tab-content>.tab-pane{margin-bottom:50px}.tab-content>.tab-pane:last-child{margin-bottom:0}}@media(max-width:767px){#content,#sideNav{float:none}#sideNav{width:100%}}
+
+#map img {
+	max-width: none;
+}
+
+#results {
+	overflow: auto;
+}
+
+nav.navbar-fixed-top {
+	margin-bottom: 10px;
+}
+
+footer {
+	background-color: #0073ae;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #009EF1), color-stop(100%, #0073ae));
+    background-image: -webkit-linear-gradient(top, #009EF1, #0073ae);
+    background-image: -moz-linear-gradient(top, #009EF1, #0073ae);
+    background-image: -ms-linear-gradient(top, #009EF1, #0073ae);
+    background-image: -o-linear-gradient(top, #009EF1, #0073ae);
+    background-image: linear-gradient(top, #009EF1, #0073ae);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 10px;
+	color: #fff;
+}
+
+footer a, 
+footer a:hover,
+footer p small {
+	color: #fff;
+}
+
+footer .links {
+	color: #99D8FA;
+}
+
+footer .mobile-logo {
+	margin: auto;
+	margin-bottom: 10px;
+}
+
+form {
+	margin-bottom: 0;
+	margin-top: 5px;
+}
+
+.container-fluid {
+	padding: 0;
+}
+
+.header {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #efefef;
+}
+
+.pad {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.result {
+	padding: 20px;
+	border-bottom: 1px solid #efefef;
+}
+
+.app-name {
+	font-weight: normal;
+	margin-left: 20px;
+	margin-bottom: 0;
+}
+
+.location-input {
+	margin-bottom: 0;
+}
+
+#mobileLogo {
+	margin-left: 15px;
+	margin-top: 8px;
+	padding: 5px;
+	padding-bottom: 4px;
+}
+
+.mobile-logo {
+	background-image: url('../img/logo.png');
+	background-repeat: no-repeat;
+	width: 97px;
+	height: 33px
+}
+
+.navbar .nav > li > a {
+	line-height: 30px;
+}
+
+.container-margin {
+	margin: 20px;
+}
+
+.results-pane {
+	margin-right: -2.127659574%
+}
+
+.map-pane {
+	width: 68.085106376% !important;
+}
+
+@media all and (-webkit-min-device-pixel-ratio:1.5){
+	.mobile-logo {
+		background-image: url('../img/logo@2x.png');
+		background-size: 97px 33px
+	}
+}
+
+@media(min-width: 1200px) {
+	.results-pane {
+		margin-right: -2.564102564%;
+	}
+
+	.map-pane {
+		width: 68.376068% !important;
+	}
+}
+
+@media(max-width: 979px) {
+	#mobileLogo {
+		margin-left: 10px;
+		margin-top: 3px;
+		padding: 0px;
+	}
+
+	.navbar .nav > li > a {
+		line-height: 19px;
+	}
+}
+
+@media(max-width: 979px) and (min-width: 768px) {
+	.results-pane {
+		margin-right: -2.762430939%;
+	}
+
+	.map-pane {
+		width: 68.508287288% !important;
+	}
+}
+
+@media(max-width: 767px) {
+	footer {
+		position: static;
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+
+	#results, #map {
+		height: auto !important;
+	}
+
+	.app-name {
+		margin-left: 0;
+		margin-bottom: 10px;
+	}
+
+	.result {
+		padding: 15px 0;
+	}
+
+	.input.input-full-width {
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.container-margin {
+		margin: 20px 0;
+	}
+}
