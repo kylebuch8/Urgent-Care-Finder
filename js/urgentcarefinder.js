@@ -10,7 +10,13 @@
 	// controller for the location input form
 	app.controller("FormInput", ["$scope", function FormInput($scope) {
 		$scope.submit = function() {
-			console.log("The location input form has been submitted");
+			/*
+			 * if we have a location, we'll emit an event so anyone
+			 * that is listening can do something with the data
+			 */
+			if (this.location !== "") {
+				$scope.$emit("LocationEntered", this.location);
+			}
 		};
 	}]);
 })();
