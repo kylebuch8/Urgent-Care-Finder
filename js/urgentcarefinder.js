@@ -7,6 +7,20 @@
 	 */
 	var app = angular.module("urgentCareFinder", []);
 
+	/*
+	 * by using the run function, we can get access to the
+	 * applications $rootScope. here we can catch events as
+	 * they are bubbled up
+	 */
+	app.run(function($rootScope) {
+		/*
+		 * listen for the LocationEntered event
+		 */
+		$rootScope.$on("LocationEntered", function() {
+			console.log("this worked");
+		});
+	});
+
 	// controller for the location input form
 	app.controller("FormInput", ["$scope", function FormInput($scope) {
 		$scope.submit = function() {
