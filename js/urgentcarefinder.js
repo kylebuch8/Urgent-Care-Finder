@@ -61,7 +61,7 @@
 
 	app.controller("UrgentCareResultListCtrl", ["$scope", function UrgentCareResultListCtrl($scope) {
 		/*
-		 * handles display of results from the places search 
+		 * handles display of results from the places search
 		*/
 		$scope.results = [ /*
 			{"provider_id":498228,"name":"Haymount Urgent Care PC","phone_number":"(910) 484-1210","street_address1":"1909 Bragg Blvd.","street_address2":"Suite 94","city":"Fayetteville","state_code":"NC","zip_code":"28303","latitude":35.0689414,"longitude":-78.9102155,"handicap_accessible":true},
