@@ -14,6 +14,11 @@
 	 */
 	app.run(function($rootScope) {
 		/*
+		 * create a geocoder that we can use later
+		 */
+		var geocoder = new google.maps.Geocoder();
+
+		/*
 		 * listen for the LocationEntered event
 		 */
 		$rootScope.$on("LocationEntered", function() {
@@ -35,8 +40,45 @@
 			$("#results").height($(window).height() - mapOffset - footerHeight);
 		};
 
-		resizePanes();
+		/*
+		 * try to get the location from the browser
+		 */
+		var initGeolocation = function() {
+			/*
+			 * check to see if we have geolocation
+			 */
+			if (Modernizr.geolocation) {
+				navigator.geolocation.getCurrentPosition(geocodePosition, getPositionError);
+			}
+		};
+
+		var geocodePosition = function(position) {
+			var request = null;
+
+			if (position.address) {
+				request = {
+					address : position.address
+				};
+			} else {
+				request = {
+					location : new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+				};
+			}
+
+			geocoder.geocode(request, function(results, status) {
+				if (status === google.maps.GeocoderStatus.OK) {
+					console.log(results);
+				}
+			});
+		};
+
+		var getPositionError = function(error) {
+			console.log(error);
+		};
+
 		$(window).resize(resizePanes);
+		resizePanes();
+		initGeolocation();
 	});
 
 	// controller for the location input form
