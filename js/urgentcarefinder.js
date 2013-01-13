@@ -63,6 +63,8 @@
 				request = {
 					location : new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 				};
+
+				$rootScope.$broadcast("LocationFound", request.location);
 			}
 
 			geocoder.geocode(request, function(results, status) {
