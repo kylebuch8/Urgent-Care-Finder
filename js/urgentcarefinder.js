@@ -82,7 +82,7 @@
 	});
 
 	// controller for the location input form
-	app.controller("FormInput", ["$scope", function FormInput($scope) {
+	app.controller("FormInputCtrl", ["$scope", function FormInputCtrl($scope) {
 		/*
 		 * build a places autocomplete that is powered by google
 		 * https://developers.google.com/maps/documentation/javascript/places#places_autocomplete
