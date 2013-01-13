@@ -19,6 +19,22 @@
 		$rootScope.$on("LocationEntered", function() {
 			console.log("this worked");
 		});
+
+		/*
+		 *
+		 */
+		var resizePanes = function() {
+			var $map = $("#map"),
+				$footer = $("footer"),
+				mapOffset = $map.offset().top,
+				footerHeight = $footer.height();
+
+			$map.height($(window).height() - mapOffset - footerHeight);
+			$("#results").height($(window).height() - mapOffset - footerHeight);
+		};
+
+		resizePanes();
+		$(window).resize(resizePanes);
 	});
 
 	// controller for the location input form
@@ -63,7 +79,7 @@
 		/*
 		 * handles display of results from the places search
 		*/
-		$scope.results = [ /*
+		$scope.results = [ 
 			{"provider_id":498228,"name":"Haymount Urgent Care PC","phone_number":"(910) 484-1210","street_address1":"1909 Bragg Blvd.","street_address2":"Suite 94","city":"Fayetteville","state_code":"NC","zip_code":"28303","latitude":35.0689414,"longitude":-78.9102155,"handicap_accessible":true},
 			{"provider_id":498754,"name":"Roxboro Med Access PLLC","phone_number":"(336) 330-0400","street_address1":"3762 Durham Rd.","street_address2":"Suite A","city":"Roxboro","state_code":"NC","zip_code":"27573","latitude":36.341315,"longitude":-78.982451,"handicap_accessible":true},
 			{"provider_id":505890,"name":"Duke Urgent Care Knightdale","phone_number":"(919) 232-5205","street_address1":"162 Legacy Oaks Drive","street_address2":"Suite 101","city":"Knightdale","state_code":"NC","zip_code":"27545","latitude":35.797663,"longitude":-78.517647,"handicap_accessible":true},
@@ -84,7 +100,7 @@
 			{"provider_id":53786,"name":"Lakeview Urgent Care","phone_number":"(910) 423-7771","street_address1":"3622 N. Main Street","street_address2":"","city":"Hope Mills","state_code":"NC","zip_code":"28348","latitude":34.972814,"longitude":-78.947238,"handicap_accessible":true},
 			{"provider_id":53786,"name":"Lakeview Urgent Care","phone_number":"(910) 486-0044","street_address1":"726 Ramsey Street","street_address2":"","city":"Fayetteville","state_code":"NC","zip_code":"28304","latitude":35.0649336,"longitude":-78.8771496,"handicap_accessible":true},
 			{"provider_id":538089,"name":"Carolinas Healthcareurgent Care","phone_number":"(980) 212-7000","street_address1":"275 Hwy 16 North","street_address2":"Suite 104","city":"Denver","state_code":"NC","zip_code":"28037","latitude":35.4395573,"longitude":-81.0068498,"handicap_accessible":true}
-			*/
+			
 		];
 	}]);
 

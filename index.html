@@ -92,21 +92,23 @@
                 </div>
                 <div class="row-fluid">
                     <div class="span4 results-pane">
-                        <div id="outsideNcMessage" class="container-margin">
-                            <h4>Outside of North Carolina?</h4>
-                            <p>Enter a North Carolina address or call 1-800-810-2583 for help. Call the number on the back of your member ID card for support specific to your plan.</p>
-                            <p><a href="tel://18008102583" class="btn btn-primary">1-800-810-2583</a></p>
-                        </div>
-                        <div ng-controller="UrgentCareResultListCtrl">
-                            <div ng-repeat="result in results" class="result">
-                                <div class="pull-right" style="text-align: center; margin-top: 0px;">
-                                    <h3>{{result.distance}}</h3>
-                                    <h5>miles</h5>
-                                    <a href="{{result.url}}" class="btn visible-phone" style="margin-top: 10px">Map</a>
+                        <div id="results">
+                            <div id="outsideNcMessage" class="container-margin">
+                                <h4>Outside of North Carolina?</h4>
+                                <p>Enter a North Carolina address or call 1-800-810-2583 for help. Call the number on the back of your member ID card for support specific to your plan.</p>
+                                <p><a href="tel://18008102583" class="btn btn-primary">1-800-810-2583</a></p>
+                            </div>
+                            <div ng-controller="UrgentCareResultListCtrl">
+                                <div ng-repeat="result in results" class="result">
+                                    <div class="pull-right" style="text-align: center; margin-top: 0px;">
+                                        <h3>{{result.distance}}</h3>
+                                        <h5>miles</h5>
+                                        <a href="{{result.url}}" class="btn visible-phone" style="margin-top: 10px">Map</a>
+                                    </div>
+                                    <h4>{{result.name}}</h4>
+                                    <p>{{result.street_address1}}<br>{{result.city}}, {{result.state_code}} {{result.zip_code}}</p>
+                                    <a href="tel://{{result.phone_number}}" class="btn">{{result.phone_number}}</a>
                                 </div>
-                                <h4>{{result.name}}</h4>
-                                <p>{{result.street_address1}}<br>{{result.city}}, {{result.state_code}} {{result.zip_code}}</p>
-                                <a href="tel://{{result.phone_number}}" class="btn">{{result.phone_number}}</a>
                             </div>
                         </div>
                     </div>
@@ -130,6 +132,7 @@
         <script src="js/json3.js"></script>
         <![endif]-->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+        <script src="http://zeptojs.com/zepto.min.js"></script>
         <script src="js/urgentcarefinder.js"></script>
     </body>
 </html>
