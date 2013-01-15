@@ -124,7 +124,7 @@
 	app.controller("UrgentCareResultListCtrl", ["$scope", function UrgentCareResultListCtrl($scope) {
 		/*
 		 * handles display of results from the places search
-		*/
+		 */
 		$scope.results = [ /*
 			{"provider_id":498228,"name":"Haymount Urgent Care PC","phone_number":"(910) 484-1210","street_address1":"1909 Bragg Blvd.","street_address2":"Suite 94","city":"Fayetteville","state_code":"NC","zip_code":"28303","latitude":35.0689414,"longitude":-78.9102155,"handicap_accessible":true},
 			{"provider_id":498754,"name":"Roxboro Med Access PLLC","phone_number":"(336) 330-0400","street_address1":"3762 Durham Rd.","street_address2":"Suite A","city":"Roxboro","state_code":"NC","zip_code":"27573","latitude":36.341315,"longitude":-78.982451,"handicap_accessible":true},
