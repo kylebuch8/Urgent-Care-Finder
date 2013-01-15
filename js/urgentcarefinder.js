@@ -5,14 +5,14 @@
 	 * we need ng-app="urgentCareFinder" in the opening
 	 * <html> tag
 	 */
-	var app = angular.module("urgentCareFinder", []).
+	var app = angular.module("urgentCareFinder", [])
 
 	/*
 	 * by using the run function, we can get access to the
 	 * applications $rootScope. here we can catch events as
 	 * they are bubbled up
 	 */
-	run(function($rootScope) {
+	.run(function($rootScope) {
 		/*
 		 * create a geocoder that we can use later
 		 */
