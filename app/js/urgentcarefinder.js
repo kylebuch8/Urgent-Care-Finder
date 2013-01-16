@@ -12,7 +12,7 @@
 	 * applications $rootScope. here we can catch events as
 	 * they are bubbled up
 	 */
-	.run(function($rootScope) {
+	.run(function($rootScope, CentersService) {
 		/*
 		 * create a geocoder that we can use later
 		 */
@@ -64,11 +64,38 @@
 					location : new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 				};
 
+				/*
+				 * the map needs the google LatLng to center the map.
+				 * we can send this to the map now before we geocode the
+				 * position
+				 */
 				$rootScope.$broadcast("LocationFound", request.location);
+
+				/*
+				 * we'll use the CentersService to fetch the data
+				 */
+				CentersService.fetch({
+					lat : position.coords.latitude,
+					lng : position.coords.longitude
+				});
 			}
 
 			geocoder.geocode(request, function(results, status) {
 				if (status === google.maps.GeocoderStatus.OK) {
+					/*
+					 * if this is an address, we need to send the result to
+					 * the map so it can be centered.
+					 */
+					if (request.address) {
+						var locationObj = results[0].geometry.location,
+							latlng = new google.maps.LatLng(locationObj.lat(), locationObj.lng());
+
+						/*
+						 * let the map know about the position
+						 */
+						$rootScope.$broadcast("LocationFound", latlng);
+					}
+
 					console.log(results);
 				}
 			});
