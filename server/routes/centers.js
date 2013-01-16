@@ -11,7 +11,7 @@ db.open(function(err, db) {
 	if (!err) {
 		console.log("Connected to 'urgentcare' database");
 
-		db.createCollection("centers", {strict : false}, function(err, collection) {
+		db.createCollection("centers", {strict : true}, function(err, collection) {
 			if (!err) {
 				console.log("The 'centers' collection doesn't exist. Creating it with sample data...");
 				populateDb();
@@ -27,12 +27,15 @@ exports.findAll = function(req, res) {
 	 * format lat,lng and that the limit is a number
 	 */
 	var latlng = req.query.latlng.split(","),
-		limit = (req.query.limit) ? parseInt(req.query.limit, 10) : 50;
+		limit = (req.query.limit) ? +req.query.limit : 50;
+
+	console.log(latlng[0]);
+	console.log(latlng[1]);
 
 	db.collection("centers", function(err, collection) {
 		collection.find({
 			location : {
-				$near : [latlng[0], latlng[1]]
+				$near : [+latlng[0], +latlng[1]]
 			}
 		}).limit(limit).toArray(function(err, items) {
 			res.send(items);
