@@ -21,8 +21,20 @@ db.open(function(err, db) {
 });
 
 exports.findAll = function(req, res) {
+	/*
+	 * we need to do some error checking here to make sure
+	 * that the latlng is required and in the following
+	 * format lat,lng and that the limit is a number
+	 */
+	var latlng = req.query.latlng.split(","),
+		limit = (req.query.limit) ? parseInt(req.query.limit, 10) : 50;
+
 	db.collection("centers", function(err, collection) {
-		collection.find().toArray(function(err, items) {
+		collection.find({
+			location : {
+				$near : [latlng[0], latlng[1]]
+			}
+		}).limit(limit).toArray(function(err, items) {
 			res.send(items);
 		});
 	});
