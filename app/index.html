@@ -105,9 +105,9 @@
                                         <h5>miles</h5>
                                         <a href="{{result.url}}" class="btn visible-phone" style="margin-top: 10px">Map</a>
                                     </div>
-                                    <h4>{{result.name}}</h4>
-                                    <p>{{result.street_address1}}<br>{{result.city}}, {{result.state_code}} {{result.zip_code}}</p>
-                                    <a href="tel://{{result.phone_number}}" class="btn">{{result.phone_number}}</a>
+                                    <h4>{{result.orgName}}</h4>
+                                    <p>{{result.address.address1}}<br>{{result.address.city}}, {{result.address.state}} {{result.address.postalCode}}</p>
+                                    <a href="tel://{{result.phone_number}}" class="btn">{{result.address.phoneNo}}</a>
                                 </div>
                             </div>
                         </div>
