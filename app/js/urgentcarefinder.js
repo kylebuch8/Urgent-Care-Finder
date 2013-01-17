@@ -21,8 +21,8 @@
 		/*
 		 * listen for the LocationEntered event
 		 */
-		$rootScope.$on("LocationEntered", function() {
-			console.log("this worked");
+		$rootScope.$on("LocationEntered", function(event, position) {
+			geocodePosition(position);
 		});
 
 		/*
