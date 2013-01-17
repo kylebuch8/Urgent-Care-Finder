@@ -11,28 +11,39 @@
 		 * to figure out what to do with the place that is returned
 		 */
 		var initAutocomplete = function() {
-			var input = document.getElementById("locationInput"),
+			var element = $("#locationInput"),
 				options = {
 					componentRestrictions : {
 						"country" : "us"
 					}
 				},
-				autocomplete = new google.maps.places.Autocomplete(input, options);
+				autocomplete = new google.maps.places.Autocomplete(element[0], options);
+
+			google.maps.event.addDomListener(element[0], "keydown", function(event) {
+				if (event.keyCode == 13) {
+					event.preventDefault();
+				}
+			});
 
 			google.maps.event.addListener(autocomplete, "place_changed", function() {
-				var place = autocomplete.getPlace();
-				console.log("place", place);
-			});
-		};
+				var place = autocomplete.getPlace(),
+					position = null;
+				
+				if (place.geometry) {
+					position = {
+						coords : {
+							latitude : place.geometry.location.lat(),
+							longitude : place.geometry.location.lng()
+						}
+					};
+				} else {
+					position = {
+						address : place.name
+					};
+				}
 
-		$scope.submit = function() {
-			/*
-			 * if we have a location, we'll emit an event so anyone
-			 * that is listening can do something with the data
-			 */
-			if (this.location !== "") {
-				$scope.$emit("LocationEntered", this.location);
-			}
+				$scope.$emit("LocationEntered", position);
+			});
 		};
 
 		initAutocomplete();
