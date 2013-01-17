@@ -144,5 +144,11 @@
         <script src="js/controllers/UrgentCareResultListCtrl.js"></script>
         <script src="js/controllers/UrgentCareMapCtrl.js"></script>
         <!-- end build -->
+
+        <script type="text/ng-template" id="/infowindow.html">
+            <h5>{{center.orgName}}</h5>
+            <p>{{center.address.address1}}<br>{{center.address.city}}, {{center.address.state}}</p>
+            <a href="#">Directions</a>
+        </script>
     </body>
 </html>
