@@ -66,42 +66,45 @@
 					position : new google.maps.LatLng(center.location.latitude, center.location.longitude)
 				});
 
-				var infoWindow = new google.maps.InfoWindow();
-
 				marker.center = center;
 				$scope.markers.push(marker);
 
 				/*
 				 * listen for clicks on the markers
 				 *
-				 * this was helpful in learning how to do this
-				 * http://plnkr.co/edit/zGDdw1?p=preview
+				 * if feel like i sold out here. i added the underscore
+				 * library to handle the template instead of using the
+				 * angularjs template.
+				 *
+				 * i could not figure out how to get this to work using purely
+				 * angular. i opened a question on stackoverflow to try to get
+				 * an answer.
+				 *
+				 * http://stackoverflow.com/questions/14490908/angularjs-google-maps-and-infowindows
 				 */
-				google.maps.event.addListener(marker, "click", (function(marker, $scope) {
-					return function() {
-						/*
-						 * close the open infowindow if there is one
-						 */
-						if ($scope.openInfoWindow) {
-							$scope.openInfoWindow.close();
-						}
+				google.maps.event.addListener(marker, "click", function(event) {
+					if ($scope.openInfoWindow) {
+						$scope.openInfoWindow.close();
+					}
 
-						/*
-						 * build the template, pass in the data and then
-						 * open the infowindow
-						 */
+					if (event.marker) {
+						marker = event.marker;
+						$scope.center = event.marker.center;
+					} else {
 						$scope.center = marker.center;
+					}
 
-						var content = '<div id="infowindow_content" ng-include src="\'/infowindow.html\'"></div>',
-							compiled = $compile(content)($scope);
+					var template = _.template($("#infoWindowTmpl").html()),
+						compiled = template($scope);
 
-						$scope.$apply();
-						infoWindow.setContent(compiled[0].innerHTML);
-						infoWindow.open(map, marker);
+					var infoWindow = new google.maps.InfoWindow({
+						content : compiled
+					});
 
-						$scope.openInfoWindow = infoWindow;
-					};
-				})(marker, $scope));
+					infoWindow.open(map, marker);
+
+					$scope.openInfoWindow = infoWindow;
+				});
 			};
 
 			var deleteMarkers = function() {
