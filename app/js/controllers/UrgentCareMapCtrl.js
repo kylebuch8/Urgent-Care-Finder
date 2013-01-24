@@ -34,6 +34,19 @@
 				setMarkers(centers);
 			});
 
+			$scope.$on("app:ResultListSelection", function(event, providerNumber) {
+				for (var i = 0, length = $scope.markers.length; i < length; i += 1) {
+					var center = $scope.markers[i].center;
+
+					if (providerNumber === center.providerNo) {
+						google.maps.event.trigger($scope.markers[i], "click", {
+							marker : $scope.markers[i]
+						});
+						break;
+					}
+				}
+			});
+
 			var setMarkers = function(centers) {
 				/*
 				 * delete any markers that might already be on the map
