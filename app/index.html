@@ -135,6 +135,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <![endif]-->
         <!--[if !IE]><!--><script src="http://zeptojs.com/zepto.min.js"></script> <!--<![endif]-->
+        <script src="js/libs/underscore-min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
 
         <!-- we'll need to build these files -->
@@ -145,10 +146,11 @@
         <script src="js/controllers/UrgentCareMapCtrl.js"></script>
         <!-- end build -->
 
-        <script type="text/ng-template" id="/infowindow.html">
-            <h5>{{center.orgName}}</h5>
-            <p>{{center.address.address1}}<br>{{center.address.city}}, {{center.address.state}}</p>
+        <script type="text/html" id="infoWindowTmpl">
+            <h5><%= center.orgName %></h5>
+            <p><%= center.address.address1 %><br><%= center.address.city %>, <%= center.address.state %></p>
             <a href="#">Directions</a>
         </script>
+
     </body>
 </html>
