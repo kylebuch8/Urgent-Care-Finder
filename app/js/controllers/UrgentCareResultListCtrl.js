@@ -12,5 +12,9 @@
 		$scope.$on("ResultsListUpdated", function(event, data) {
 			$scope.results = data;
 		});
+
+		$scope.select = function(providerNumber) {
+			$scope.$emit("ResultListSelection", providerNumber);
+		};
 	}]);
 })();
