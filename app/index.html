@@ -105,14 +105,16 @@
                                         <h5>miles</h5>
                                         <a href="{{result.url}}" class="btn visible-phone" style="margin-top: 10px">Map</a>
                                     </div>
-                                    <h4>{{result.orgName}}</h4>
+                                    <h4 ng-click="select(result.providerNo)">{{result.orgName}}</h4>
                                     <p>{{result.address.address1}}<br>{{result.address.city}}, {{result.address.state}} {{result.address.postalCode}}</p>
                                     <a href="tel://{{result.address.phoneNo|phone}}" class="btn">{{result.address.phoneNo}}</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="map" class="span8 map-pane hidden-phone" ng-controller="UrgentCareMapCtrl"></div>
+                    <div class="span8 map-pane hidden-phone" ng-controller="UrgentCareMapCtrl">
+                        <div id="map"></div>
+                    </div>
                 </div>
             </div>
         </div>
