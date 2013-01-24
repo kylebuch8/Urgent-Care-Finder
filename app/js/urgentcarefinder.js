@@ -26,6 +26,13 @@
 		});
 
 		/*
+		 * listen for when a result list selection has been made
+		 */
+		$rootScope.$on("ResultListSelection", function(event, providerNumber) {
+			$rootScope.$broadcast("app:ResultListSelection", providerNumber);
+		});
+
+		/*
 		 * we need to set the height of the left and right panes
 		 * and listen for resize events in the browser so we can
 		 * readjust the height
