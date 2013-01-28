@@ -107,7 +107,7 @@
 		};
 
 		var getPositionError = function(error) {
-			console.log(error);
+			//console.log(error);
 		};
 
 		$(window).resize(resizePanes);
