@@ -101,9 +101,7 @@
 						 * let the map know about the position
 						 */
 						$rootScope.$broadcast("LocationFound", latlng);
-					}
 
-					console.log(results);
 				}
 			});
 		};
