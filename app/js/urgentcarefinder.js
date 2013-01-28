@@ -135,7 +135,7 @@
 	 */
 	.filter("phone", function() {
 		return function(phone) {
-			phone = phone.replace(/-/g, "");
+			phone = phone.replace(/[- ()]/g, "");
 
 			return "1" + phone;
 		};
