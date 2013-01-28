@@ -102,6 +102,14 @@
 						 */
 						$rootScope.$broadcast("LocationFound", latlng);
 
+						/*
+						 * we'll use the CentersService to fetch the data
+						 */
+						CentersService.fetch({
+							lat : locationObj.lat(),
+							lng : locationObj.lng()
+						});
+					}
 				}
 			});
 		};
