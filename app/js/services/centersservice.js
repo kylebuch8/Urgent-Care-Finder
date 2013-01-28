@@ -25,7 +25,7 @@
 			}).success(function(data, status) {
 				$rootScope.$broadcast("ResultsListUpdated", data);
 			}).error(function(data, status) {
-				console.log("error", status);
+				//console.log("error", status);
 			});
 		};
 
