@@ -14,7 +14,7 @@ db.open(function(err, db) {
 		db.createCollection("centers", {strict : true}, function(err, collection) {
 			if (!err) {
 				console.log("The 'centers' collection doesn't exist. Creating it with sample data...");
-				populateDb();
+				//populateDb();
 			}
 		});
 	}
@@ -38,9 +38,34 @@ exports.findAll = function(req, res) {
 				$near : [+latlng[0], +latlng[1]]
 			}
 		}).limit(limit).toArray(function(err, items) {
+            /*
+             * loop through each of the items and calculate the distance
+             * between the urgent care center and the latlng
+             */
+            for (var i = 0, length = items.length; i < length; i += 1) {
+                var item = items[i];
+
+                item.distance = Math.round(distanceFrom(latlng[0], latlng[1], item.location.latitude, item.location.longitude) * 10) / 10;
+            }
+
+            // return the items
 			res.send(items);
 		});
 	});
+};
+
+var distanceFrom = function(lat1, lon1, lat2, lon2) {
+    var R = 3958.75, // earths radius in miles
+        dLat = (lat2-lat1) * (Math.PI / 180),
+        dLon = (lon2-lon1) * (Math.PI / 180),
+        lat1 = lat1 * (Math.PI / 180),
+        lat2 = lat2 * (Math.PI / 180);
+
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2), 
+        c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)),
+        d = Math.abs(R * c);
+
+    return d;
 };
 
 exports.findById = function(req, res) {
