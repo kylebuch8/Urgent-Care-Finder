@@ -48,6 +48,11 @@ exports.findAll = function(req, res) {
                 item.distance = Math.round(distanceFrom(latlng[0], latlng[1], item.location.latitude, item.location.longitude) * 10) / 10;
             }
 
+            // sort the items based on distance
+            items.sort(function(a, b) {
+                return (a.distance > b.distance) ? 1 : (b.distance > a.distance) ? -1 : 0;
+            });
+
             // return the items
 			res.send(items);
 		});
