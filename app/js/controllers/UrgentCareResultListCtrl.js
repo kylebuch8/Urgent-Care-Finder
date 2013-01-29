@@ -1,16 +1,21 @@
 (function() {
 	"use strict";
 
-	angular.module("urgentCareFinder").controller("UrgentCareResultListCtrl", ["$scope", function UrgentCareResultListCtrl($scope) {
+	angular.module("urgentCareFinder").controller("UrgentCareResultListCtrl", ["$scope", "CentersService", function UrgentCareResultListCtrl($scope, CentersService) {
 		/*
 		 * handles display of results from the places search
 		 */
 		
 		/*
-		 * listen for when the results list is updated
+		 * use the CentersService and watch for when it changes.
+		 * once it does change and have data, we'll set the $scope.results
+		 * to the newCenters from the service
 		 */
-		$scope.$on("ResultsListUpdated", function(event, data) {
-			$scope.results = data;
+		$scope.CentersService = CentersService;
+		$scope.$watch("CentersService.centers", function(newCenters, oldCenters, scope) {
+			if (newCenters.length > 0) {
+				$scope.results = newCenters;
+			}
 		});
 
 		$scope.select = function(providerNumber) {

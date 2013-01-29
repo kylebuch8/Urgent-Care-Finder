@@ -14,23 +14,25 @@
 	 * }
 	 */
 	angular.module("urgentCareFinder").factory("CentersService", ["$rootScope", "$http", function($rootScope, $http) {
-		var fetch = function(location) {
-			var method = "GET",
-				latlngStr = location.lat + "," + location.lng,
-				url = "http://localhost:3000/centers/?latlng=" + latlngStr;
+		var CentersService = {
+			fetch : function(location) {
+				var method = "GET",
+					latlngStr = location.lat + "," + location.lng,
+					url = "http://localhost:3000/centers/?latlng=" + latlngStr;
 
-			$http({
-				method : method,
-				url : url
-			}).success(function(data, status) {
-				$rootScope.$broadcast("ResultsListUpdated", data);
-			}).error(function(data, status) {
-				//console.log("error", status);
-			});
+				$http({
+					method : method,
+					url : url
+				}).success(function(data, status) {
+					CentersService.centers = data;
+					$rootScope.$broadcast("ResultsListUpdated", data);
+				}).error(function(data, status) {
+					//console.log("error", status);
+				});
+			},
+			centers : []
 		};
 
-		return {
-			fetch : fetch
-		};
+		return CentersService;
 	}]);
 })();

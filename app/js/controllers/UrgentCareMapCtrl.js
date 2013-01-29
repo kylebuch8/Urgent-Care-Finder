@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
 
-	angular.module("urgentCareFinder").controller("UrgentCareMapCtrl", ["$scope", "$compile", function UrgentCareMapCtrl($scope, $compile) {
+	angular.module("urgentCareFinder").controller("UrgentCareMapCtrl", ["$scope", "$compile", "CentersService", function UrgentCareMapCtrl($scope, $compile, CentersService) {
 		var initMap = function() {
 			$scope.markers = [];
 			$scope.openInfoWindow = null;
@@ -27,11 +27,14 @@
 			});
 
 			/*
-			 * listen for when the results list is populated. we can populate
-			 * the map with markers at this point
+			 * use the CentersService to watch when we have data. we can populate
+			 * the map with markers at this point.
 			 */
-			$scope.$on("ResultsListUpdated", function(event, centers) {
-				setMarkers(centers);
+			$scope.CentersService = CentersService;
+			$scope.$watch("CentersService.centers", function(newCenters, oldCenters, scope) {
+				if (newCenters.length > 0) {
+					setMarkers(newCenters);
+				}
 			});
 
 			$scope.$on("app:ResultListSelection", function(event, providerNumber) {
