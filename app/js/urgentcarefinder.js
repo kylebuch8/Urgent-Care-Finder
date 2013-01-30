@@ -12,17 +12,19 @@
 	 * applications $rootScope. here we can catch events as
 	 * they are bubbled up
 	 */
-	.run(function($rootScope, CentersService) {
+	.run(function($rootScope, LocationService, CentersService) {
 		/*
-		 * create a geocoder that we can use later
+		 * watch for when a location is found. this can happen either through
+		 * geolocation or when a user enters a location
 		 */
-		var geocoder = new google.maps.Geocoder();
-
-		/*
-		 * listen for the LocationEntered event
-		 */
-		$rootScope.$on("LocationEntered", function(event, position) {
-			geocodePosition(position);
+		$rootScope.LocationService = LocationService;
+		$rootScope.$watch("LocationService.location", function(newLocation, oldLocation, scope) {
+			if (newLocation) {
+				CentersService.fetch({
+					lat : newLocation.lat(),
+					lng : newLocation.lng()
+				});
+			}
 		});
 
 		/*
@@ -47,80 +49,8 @@
 			$("#results").height($(window).height() - mapOffset - footerHeight);
 		};
 
-		/*
-		 * try to get the location from the browser
-		 */
-		var initGeolocation = function() {
-			/*
-			 * check to see if we have geolocation
-			 */
-			if (Modernizr.geolocation) {
-				navigator.geolocation.getCurrentPosition(geocodePosition, getPositionError);
-			}
-		};
-
-		var geocodePosition = function(position) {
-			var request = null;
-
-			if (position.address) {
-				request = {
-					address : position.address
-				};
-			} else {
-				request = {
-					location : new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-				};
-
-				/*
-				 * the map needs the google LatLng to center the map.
-				 * we can send this to the map now before we geocode the
-				 * position
-				 */
-				$rootScope.$broadcast("LocationFound", request.location);
-
-				/*
-				 * we'll use the CentersService to fetch the data
-				 */
-				CentersService.fetch({
-					lat : position.coords.latitude,
-					lng : position.coords.longitude
-				});
-			}
-
-			geocoder.geocode(request, function(results, status) {
-				if (status === google.maps.GeocoderStatus.OK) {
-					/*
-					 * if this is an address, we need to send the result to
-					 * the map so it can be centered.
-					 */
-					if (request.address) {
-						var locationObj = results[0].geometry.location,
-							latlng = new google.maps.LatLng(locationObj.lat(), locationObj.lng());
-
-						/*
-						 * let the map know about the position
-						 */
-						$rootScope.$broadcast("LocationFound", latlng);
-
-						/*
-						 * we'll use the CentersService to fetch the data
-						 */
-						CentersService.fetch({
-							lat : locationObj.lat(),
-							lng : locationObj.lng()
-						});
-					}
-				}
-			});
-		};
-
-		var getPositionError = function(error) {
-			//console.log(error);
-		};
-
 		$(window).resize(resizePanes);
 		resizePanes();
-		initGeolocation();
 	})
 	/*
 	 * create a filter to remove all dashes for phone
