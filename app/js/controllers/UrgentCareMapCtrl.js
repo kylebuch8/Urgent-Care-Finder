@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
 
-	angular.module("urgentCareFinder").controller("UrgentCareMapCtrl", ["$scope", "$compile", "CentersService", function UrgentCareMapCtrl($scope, $compile, CentersService) {
+	angular.module("urgentCareFinder").controller("UrgentCareMapCtrl", ["$scope", "$compile", "LocationService", "CentersService", function UrgentCareMapCtrl($scope, $compile, LocationService, CentersService) {
 		var initMap = function() {
 			$scope.markers = [];
 			$scope.openInfoWindow = null;
@@ -17,13 +17,16 @@
 				map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 			/*
-			 * listen for when a location is found. once we have a location
+			 * watch for when a location is found. once we have a location
 			 * center the map on that location. the data that is passed is a
 			 * google maps LatLng object
 			 */
-			$scope.$on("LocationFound", function(event, latlng) {
-				map.setZoom(12);
-				map.setCenter(latlng);
+			$scope.LocationService = LocationService;
+			$scope.$watch("LocationService.location", function(newLocation, oldLocation, scope) {
+				if (newLocation) {
+					map.setZoom(12);
+					map.setCenter(newLocation);
+				}
 			});
 
 			/*
