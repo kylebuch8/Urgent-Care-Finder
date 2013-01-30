@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
 
-	angular.module("urgentCareFinder").controller("FormInputCtrl", ["$scope", function FormInputCtrl($scope) {
+	angular.module("urgentCareFinder").controller("FormInputCtrl", ["$scope", "LocationService", function FormInputCtrl($scope, LocationService) {
 		/*
 		 * build a places autocomplete that is powered by google
 		 * https://developers.google.com/maps/documentation/javascript/places#places_autocomplete
@@ -42,7 +42,7 @@
 					};
 				}
 
-				$scope.$emit("LocationEntered", position);
+				LocationService.geocodePosition(position);
 			});
 		};
 
