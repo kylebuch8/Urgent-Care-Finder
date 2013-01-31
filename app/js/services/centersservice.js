@@ -13,7 +13,9 @@
 	 *   lng : yy
 	 * }
 	 */
-	angular.module("urgentCareFinder").factory("CentersService", ["$rootScope", "$http", function($rootScope, $http) {
+	angular.module("urgentCareFinder").factory("CentersService", ["$http", function($http) {
+		var centers = [];
+
 		var CentersService = {
 			fetch : function(location) {
 				var method = "GET",
@@ -24,13 +26,18 @@
 					method : method,
 					url : url
 				}).success(function(data, status) {
-					CentersService.centers = data;
-					$rootScope.$broadcast("ResultsListUpdated", data);
+					centers = data;
 				}).error(function(data, status) {
 					//console.log("error", status);
 				});
 			},
-			centers : []
+			setSelectedCenter : function(center) {
+				CentersService.selectedCenter = center;
+			},
+			selectedCenter : null,
+			centers : function() {
+				return centers;
+			}
 		};
 
 		return CentersService;

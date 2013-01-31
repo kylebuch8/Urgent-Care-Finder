@@ -99,7 +99,7 @@
                                 <p><a href="tel://18008102583" class="btn btn-primary">1-800-810-2583</a></p>
                             </div>
                             <div ng-controller="UrgentCareResultListCtrl">
-                                <div ng-repeat="result in results" class="result">
+                                <div ng-repeat="result in results()" class="result">
                                     <div class="pull-right" style="text-align: center; margin-top: 0px;">
                                         <h3>{{result.distance}}</h3>
                                         <h5>miles</h5>

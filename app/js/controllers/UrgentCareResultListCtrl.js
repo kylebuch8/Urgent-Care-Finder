@@ -12,11 +12,17 @@
 		 * to the newCenters from the service
 		 */
 		$scope.CentersService = CentersService;
-		$scope.$watch("CentersService.centers", function(newCenters, oldCenters, scope) {
+		$scope.$watch("CentersService.centers()", function(newCenters, oldCenters, scope) {
 			if (newCenters.length > 0) {
-				$scope.results = newCenters;
+				/*
+				 * when the location has changed, we need to scroll the results
+				 * list back to the top
+				 */
+				$("#results")[0].scrollTop = 0;
 			}
 		});
+
+		$scope.results = CentersService.centers;
 
 		$scope.select = function(providerNumber) {
 			$scope.$emit("ResultListSelection", providerNumber);

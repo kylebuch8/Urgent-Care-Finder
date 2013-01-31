@@ -34,7 +34,7 @@
 			 * the map with markers at this point.
 			 */
 			$scope.CentersService = CentersService;
-			$scope.$watch("CentersService.centers", function(newCenters, oldCenters, scope) {
+			$scope.$watch("CentersService.centers()", function(newCenters, oldCenters, scope) {
 				if (newCenters.length > 0) {
 					setMarkers(newCenters);
 				}
