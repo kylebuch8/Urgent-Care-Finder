@@ -1,10 +1,10 @@
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"  xmlns:ng="http://angularjs.org" ng-app="urgentCareFinder"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en" xmlns:ng="http://angularjs.org" ng-app="urgentCareFinder"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en" xmlns:ng="http://angularjs.org" ng-app="urgentCareFinder"> <![endif]-->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" ng-app="urgentCareFinder"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
 
@@ -31,23 +31,11 @@
            Modernizr enables HTML5 elements & feature detects for optimal performance.
            Create your own custom Modernizr build: www.modernizr.com/download/ -->
         <script src="//www.bcbsnc.com/assets/global/js/libs/modernizr/2.6.1/modernizr.min.js"></script>
-        <!--[if lte IE 8]>
-          <script>
-            document.createElement('ng-include');
-            document.createElement('ng-pluralize');
-            document.createElement('ng-view');
-     
-            // Optionally these for CSS
-            document.createElement('ng:include');
-            document.createElement('ng:pluralize');
-            document.createElement('ng:view');
-          </script>
-        <![endif]-->
 
         <!-- Google Maps -->
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVxUigVOVQ8GsIf04qEcN4VEiAhqaDBJw&libraries=places&sensor=true"></script>
     </head>
-    <body>
+    <body id="ng-app" ng-app="urgentCareFinder">
         <nav role="navigation" class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
@@ -92,23 +80,21 @@
                 </div>
                 <div class="row-fluid">
                     <div class="span4 results-pane">
-                        <div id="results">
-                            <div id="outsideNcMessage" class="container-margin">
+                        <div id="results" ng-controller="UrgentCareResultListCtrl">
+                            <div id="outsideNcMessage" class="container-margin" ng-hide="!outsideNC()">
                                 <h4>Outside of North Carolina?</h4>
                                 <p>Enter a North Carolina address or call 1-800-810-2583 for help. Call the number on the back of your member ID card for support specific to your plan.</p>
                                 <p><a href="tel://18008102583" class="btn btn-primary">1-800-810-2583</a></p>
                             </div>
-                            <div ng-controller="UrgentCareResultListCtrl">
-                                <div ng-repeat="result in results()" class="result">
-                                    <div class="pull-right" style="text-align: center; margin-top: 0px;">
-                                        <h3>{{result.distance}}</h3>
-                                        <h5>miles</h5>
-                                        <a href="{{result.url}}" class="btn visible-phone" style="margin-top: 10px">Map</a>
-                                    </div>
-                                    <h4 ng-click="select(result.providerNo)">{{result.orgName}}</h4>
-                                    <p>{{result.address.address1}}<br>{{result.address.city}}, {{result.address.state}} {{result.address.postalCode}}</p>
-                                    <a href="tel://{{result.address.phoneNo|phone}}" class="btn">{{result.address.phoneNo}}</a>
+                            <div ng-repeat="result in results()" class="result">
+                                <div class="pull-right" style="text-align: center; margin-top: 0px;">
+                                    <h3>{{result.distance}}</h3>
+                                    <h5>miles</h5>
+                                    <a href="{{result.url}}" class="btn visible-phone" style="margin-top: 10px">Map</a>
                                 </div>
+                                <h4 ng-click="select(result.providerNo)">{{result.orgName}}</h4>
+                                <p>{{result.address.address1}}<br>{{result.address.city}}, {{result.address.state}} {{result.address.postalCode}}</p>
+                                <a href="tel://{{result.address.phoneNo|phone}}" class="btn">{{result.address.phoneNo}}</a>
                             </div>
                         </div>
                     </div>
