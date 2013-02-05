@@ -19,11 +19,16 @@
 				},
 				autocomplete = new google.maps.places.Autocomplete(element[0], options);
 
-			google.maps.event.addDomListener(element[0], "keydown", function(event) {
+			/*google.maps.event.addDomListener(element[0], "keydown", function(event) {
 				if (event.keyCode == 13) {
-					event.preventDefault();
+					if (event.preventDefault) {
+						event.preventDefault();
+					} else {
+						event.returnValue = false;
+					}
+					//event.preventDefault();
 				}
-			});
+			});*/
 
 			google.maps.event.addListener(autocomplete, "place_changed", function() {
 				var place = autocomplete.getPlace(),
