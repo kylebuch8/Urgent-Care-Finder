@@ -69,7 +69,7 @@ exports.findAll = function(req, res) {
             // set the items on the response
             response.centers = items;
 
-			res.send(response);
+			res.jsonp(response);
 		});
 	});
 };
@@ -89,7 +89,7 @@ var distanceFrom = function(lat1, lon1, lat2, lon2) {
 };
 
 exports.findById = function(req, res) {
-	res.send({
+	res.jsonp({
 		id : req.params.id,
 		name : "The Name",
 		description : "description"

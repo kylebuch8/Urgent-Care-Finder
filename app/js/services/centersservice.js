@@ -23,15 +23,13 @@
 					latlngStr = location.lat + "," + location.lng,
 					url = "http://kyles-mackybook.bcbsnc.com:3000/centers/?latlng=" + latlngStr;
 
-				$http({
-					method : method,
-					url : url
-				}).success(function(data, status) {
-					centers = data.centers;
-					centersOutsideNC = data.centersOutsideNC;
-				}).error(function(data, status) {
-					//console.log("error", status);
-				});
+				$http.jsonp(url + "&callback=JSON_CALLBACK")
+					.success(function(data, status) {
+						centers = data.centers;
+						centersOutsideNC = data.centersOutsideNC;
+					}).error(function(data, status) {
+						//console.log("error", status);
+					});
 			},
 			setSelectedCenter : function(center) {
 				CentersService.selectedCenter = center;
