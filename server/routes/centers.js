@@ -38,14 +38,27 @@ exports.findAll = function(req, res) {
 				$near : [+latlng[0], +latlng[1]]
 			}
 		}).limit(limit).toArray(function(err, items) {
+            var response = {
+                centersOutsideNC : false
+            };
+
             /*
              * loop through each of the items and calculate the distance
              * between the urgent care center and the latlng
+             *
+             * also determine if any of the centers are outside of NC and
+             * set the centersOutsideNC flag to true if one of them is
              */
             for (var i = 0, length = items.length; i < length; i += 1) {
                 var item = items[i];
 
                 item.distance = Math.round(distanceFrom(latlng[0], latlng[1], item.location.latitude, item.location.longitude) * 10) / 10;
+
+                if (response.centersOutsideNC === false) {
+                    if (item.address.state !== "NC") {
+                        response.centersOutsideNC = true;
+                    }
+                }
             }
 
             // sort the items based on distance
@@ -53,8 +66,10 @@ exports.findAll = function(req, res) {
                 return (a.distance > b.distance) ? 1 : (b.distance > a.distance) ? -1 : 0;
             });
 
-            // return the items
-			res.send(items);
+            // set the items on the response
+            response.centers = items;
+
+			res.send(response);
 		});
 	});
 };

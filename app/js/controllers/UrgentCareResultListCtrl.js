@@ -23,6 +23,7 @@
 		});
 
 		$scope.results = CentersService.centers;
+		$scope.outsideNC = CentersService.centersOutsideNC;
 
 		$scope.select = function(providerNumber) {
 			$scope.$emit("ResultListSelection", providerNumber);
