@@ -14,19 +14,21 @@
 	 * }
 	 */
 	angular.module("urgentCareFinder").factory("CentersService", ["$http", function($http) {
-		var centers = [];
+		var centers = [],
+			centersOutsideNC = false;
 
 		var CentersService = {
 			fetch : function(location) {
 				var method = "GET",
 					latlngStr = location.lat + "," + location.lng,
-					url = "http://localhost:3000/centers/?latlng=" + latlngStr;
+					url = "http://kyles-mackybook.bcbsnc.com:3000/centers/?latlng=" + latlngStr;
 
 				$http({
 					method : method,
 					url : url
 				}).success(function(data, status) {
-					centers = data;
+					centers = data.centers;
+					centersOutsideNC = data.centersOutsideNC;
 				}).error(function(data, status) {
 					//console.log("error", status);
 				});
@@ -37,6 +39,9 @@
 			selectedCenter : null,
 			centers : function() {
 				return centers;
+			},
+			centersOutsideNC : function() {
+				return centersOutsideNC;
 			}
 		};
 
