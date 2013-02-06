@@ -99,11 +99,11 @@ form {
 	margin: 20px;
 }
 
-.results-pane {
+.left-pane {
 	margin-right: -2.127659574%
 }
 
-.map-pane {
+.right-pane {
 	width: 68.085106376% !important;
 }
 
@@ -115,11 +115,11 @@ form {
 }
 
 @media(min-width: 1200px) {
-	.results-pane {
+	.left-pane {
 		margin-right: -2.564102564%;
 	}
 
-	.map-pane {
+	.right-pane {
 		width: 68.376068% !important;
 	}
 }
@@ -137,11 +137,11 @@ form {
 }
 
 @media(max-width: 979px) and (min-width: 768px) {
-	.results-pane {
+	.left-pane {
 		margin-right: -2.762430939%;
 	}
 
-	.map-pane {
+	.right-pane {
 		width: 68.508287288% !important;
 	}
 }
@@ -151,6 +151,14 @@ form {
 		position: static;
 		margin-left: -20px;
 		margin-right: -20px;
+	}
+
+	.left-pane {
+		margin-right: inherit;
+	}
+
+	.right-pane {
+		width: 100% !important;
 	}
 
 	#results, #map {
