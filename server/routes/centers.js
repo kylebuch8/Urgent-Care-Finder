@@ -53,6 +53,7 @@ exports.findAll = function(req, res) {
                 var item = items[i];
 
                 item.distance = Math.round(distanceFrom(latlng[0], latlng[1], item.location.latitude, item.location.longitude) * 10) / 10;
+                item.mapUrl = "http://maps.google.com/maps?q=" + encodeURIComponent(item.orgName + ", " + item.address.address1 + ", " + item.address.city + ", " + item.address.state);
 
                 if (response.centersOutsideNC === false) {
                     if (item.address.state !== "NC") {

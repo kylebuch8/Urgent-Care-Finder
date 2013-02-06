@@ -58,6 +58,7 @@
                             <li><a href="http://www.bcbsnc.com/apps/drugsearchweb/drugSearch.faces">Find a Drug</a></li>
                             <li><a href="http://www.bcbsnc.com/careers/">Careers</a></li>
                             <li><a href="http://www.bcbsnc.com/content/corporate/contacts.htm">Contact Us</a></li>
+                            <li><a href="#">Disclosures and Disclaimers</a></li>
                         </ul>
                     </div>
                 </div>
@@ -90,7 +91,7 @@
                                 <div class="pull-right" style="text-align: center; margin-top: 0px;">
                                     <h3>{{result.distance}}</h3>
                                     <h5>miles</h5>
-                                    <a href="{{result.url}}" class="btn visible-phone" style="margin-top: 10px">Map</a>
+                                    <a href="{{result.mapUrl}}" class="btn visible-phone" style="margin-top: 10px">Map</a>
                                 </div>
                                 <h4 ng-click="select(result.providerNo)">{{result.orgName}}</h4>
                                 <p>{{result.address.address1}}<br>{{result.address.city}}, {{result.address.state}} {{result.address.postalCode}}</p>
@@ -139,7 +140,7 @@
         <script type="text/html" id="infoWindowTmpl">
             <h5><%= center.orgName %></h5>
             <p><%= center.address.address1 %><br><%= center.address.city %>, <%= center.address.state %></p>
-            <a href="#">Directions</a>
+            <a href="<%= center.mapUrl %>">Directions</a>
         </script>
 
     </body>
