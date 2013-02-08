@@ -31,6 +31,7 @@
            Modernizr enables HTML5 elements & feature detects for optimal performance.
            Create your own custom Modernizr build: www.modernizr.com/download/ -->
         <script src="//www.bcbsnc.com/assets/global/js/libs/modernizr/2.6.1/modernizr.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
 
         <!-- Google Maps -->
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVxUigVOVQ8GsIf04qEcN4VEiAhqaDBJw&amp;libraries=places&amp;sensor=true"></script>
@@ -87,7 +88,7 @@
                                 <p>Enter a North Carolina address or call 1-800-810-2583 for help. Call the number on the back of your member ID card for support specific to your plan.</p>
                                 <p><a href="tel://18008102583" class="btn btn-primary">1-800-810-2583</a></p>
                             </div>
-                            <div data-ng-repeat="result in results()" class="result">
+                            <div data-ng-repeat="result in results()" class="result ng-cloak" data-ng-cloak>
                                 <div class="pull-right" style="text-align: center; margin-top: 0px;">
                                     <h3>{{result.distance}}</h3>
                                     <h5>miles</h5>
@@ -122,7 +123,6 @@
         <![endif]-->
         <!--[if !IE]><!--><script src="http://zeptojs.com/zepto.min.js"></script> <!--<![endif]-->
         <script src="js/libs/underscore-min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
 
         <!--[if lt IE 8]>
         <script src="js/libs/json3.min.js"></script>
