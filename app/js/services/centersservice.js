@@ -15,7 +15,7 @@
 	 */
 	angular.module("urgentCareFinder").factory("CentersService", ["$http", function($http) {
 		var centers = [],
-			centersOutsideNC = false;
+			centersOutsideNC = true;
 
 		var CentersService = {
 			fetch : function(location) {
